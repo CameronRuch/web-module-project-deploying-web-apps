@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import './App.css';
 import Form from './Components/Form';
-import axios from 'axios';
-import * as yup from 'yup';
-import schema from './validation/formSchema';
+
+
+
 
 const initialFormValues = {
   username: '',
@@ -26,23 +26,11 @@ function App() {
   const [users, setUsers] = useState([]);
 
   const handleSubmit = () => {
-    axios.post('https://reqres.in/api/users', formValues)
-      .then(res => {
-        setUsers([ res.data, ...users ])
-      })
-      .catch(err => console.error(err))
-      .finally(() => setFormValues(initialFormValues))
-  }
-
-  const validate = (name, value) => {
-    yup.reach(schema, name)
-      .validate(value)
-      .then(() => setFormErrors({ ...formErrors, [name]: '' }))
-      .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }))
+    setUsers(users)
   }
   
   const handleChange = (name, value) => {
-    validate(name, value);
+
     setFormValues({ ...formValues, [name]: value });
   }
 
